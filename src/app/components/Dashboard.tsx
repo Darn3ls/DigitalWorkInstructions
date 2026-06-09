@@ -7,9 +7,10 @@ interface DashboardProps {
   onOpen: (wi: WorkInstruction) => void;
   onEdit: (wi: WorkInstruction) => void;
   onCreate: () => void;
+  onLogout: () => void;
 }
 
-export function Dashboard({ onOpen, onEdit, onCreate }: DashboardProps) {
+export function Dashboard({ onOpen, onEdit, onCreate, onLogout }: DashboardProps) {
   const [search, setSearch] = useState("");
   const [filterStatus, setFilterStatus] = useState<WIStatus | "all">("all");
   const [filterCategory, setFilterCategory] = useState("all");
@@ -146,7 +147,14 @@ export function Dashboard({ onOpen, onEdit, onCreate }: DashboardProps) {
                     </button>
                   ))}
                   <div className="border-t border-border mt-1 pt-1">
-                    <button className="w-full text-left px-4 py-2 hover:bg-muted transition-colors" style={{ fontSize: "0.875rem", color: "var(--destructive)" }}>
+                    <button
+                      onClick={() => {
+                        setProfileOpen(false);
+                        onLogout();
+                      }}
+                      className="w-full text-left px-4 py-2 hover:bg-muted transition-colors"
+                      style={{ fontSize: "0.875rem", color: "var(--destructive)" }}
+                    >
                       Sign out
                     </button>
                   </div>
@@ -307,7 +315,7 @@ export function Dashboard({ onOpen, onEdit, onCreate }: DashboardProps) {
       </button>
 
       {profileOpen && (
-        <div className="fixed inset-0 z-20" onClick={() => setProfileOpen(false)} />
+        <div className="fixed inset-0 z-10" onClick={() => setProfileOpen(false)} />
       )}
     </div>
   );

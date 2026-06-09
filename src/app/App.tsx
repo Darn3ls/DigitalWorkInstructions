@@ -25,6 +25,7 @@ export default function App() {
         onOpen={(wi) => setScreen({ name: "viewer", wi })}
         onEdit={(wi) => setScreen({ name: "editor", wi })}
         onCreate={() => setScreen({ name: "editor" })}
+        onLogout={() => setScreen({ name: "login" })}
       />
     );
   }
